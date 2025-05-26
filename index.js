@@ -2,6 +2,7 @@ import { getMongoConnection } from './mongo.js';
 
 import cors from 'cors'
 import express from 'express'
+import { ObjectId } from 'mongodb';
 const server = express();
 server.use(express.json());
 server.use(cors());
@@ -44,6 +45,19 @@ server.delete('/galeria/:id', async (req, res) => {
     res.sendStatus(204);
 });
 
+server.put('/galeria/:id', async (req, res) => {
+    const id = req.params.id;
+    const dados = req.body;
+
+    await conn.db('barbearia-romas')
+        .collection('galeria')
+        .updateOne(
+            { _id: new ObjectId(id) },
+            { $set: dados }
+        );
+
+    res.send({ ...dados, id });
+});
 
 server.get('/agendamentos', async (req, res) => {
     const dados = await conn
