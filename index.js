@@ -94,9 +94,19 @@ server.delete('/agendamentos/:id', async (req, res) => {
     const id = req.params.id;
 
     await conn
-    .db('barbearia-romas')
-    .collection('agendamento')
-    .deleteOne({_id: new ObjectId(id)});
+        .db('barbearia-romas')
+        .collection('agendamento')
+        .deleteOne({ _id: new ObjectId(id) });
+});
+
+server.put('/agendamentos/:id', async (req, res) => {
+    const id = req.params.id;
+    const dados = req.body;
+
+    await conn
+        .db('barbearia-romas')
+        .collection('agendamentos')
+        .updateOne({ _id: new ObjectId(id) }, { $set: dados });
 });
 
 server.listen(5010, () => console.log('API is up'));
