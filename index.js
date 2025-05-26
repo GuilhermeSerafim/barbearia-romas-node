@@ -105,7 +105,7 @@ server.put('/agendamentos/:id', async (req, res) => {
 
     await conn
         .db('barbearia-romas')
-        .collection('agendamentos')
+        .collection('agendamento')
         .updateOne({ _id: new ObjectId(id) }, { $set: dados });
 });
 
