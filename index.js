@@ -79,4 +79,15 @@ server.get('/agendamentos', async (req, res) => {
     res.send(resultado);
 });
 
+server.post('/agendamentos', async (req, res) => {
+    const item = req.body;
+
+    const resultado = await conn
+        .db('barbearia-romas')
+        .collection('agendamento')
+        .insertOne(item);
+
+    res.status(201).send({ ...item, id: resultado.insertedId });
+});
+
 server.listen(5010, () => console.log('API is up'));
