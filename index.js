@@ -97,6 +97,7 @@ server.delete('/agendamentos/:id', async (req, res) => {
         .db('barbearia-romas')
         .collection('agendamento')
         .deleteOne({ _id: new ObjectId(id) });
+    return res.sendStatus(204);
 });
 
 server.put('/agendamentos/:id', async (req, res) => {
