@@ -25,6 +25,18 @@ server.get('/galeria', async (req, res) => {
     res.send(resultado);
 });
 
+
+server.post('/galeria', async (req, res) => {
+    const item = req.body;
+    const resultado = await conn.db('barbearia-romas')
+        .collection('galeria')
+        .insertOne(item);
+
+    res.status(201).send({ ...item, id: resultado.insertedId });
+});
+
+
+
 server.get('/agendamentos', async (req, res) => {
     const dados = await conn
         .db('barbearia-romas')
