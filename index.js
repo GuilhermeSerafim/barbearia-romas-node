@@ -73,7 +73,7 @@ server.get('/agendamentos', async (req, res) => {
         servico: doc.servico,
         barbeiro: doc.barbeiro,
         data: doc.data,
-        horario: doc.horarios
+        horario: doc.horario
     }));
 
     res.send(resultado);
