@@ -35,6 +35,14 @@ server.post('/galeria', async (req, res) => {
     res.status(201).send({ ...item, id: resultado.insertedId });
 });
 
+server.delete('/galeria/:id', async (req, res) => {
+    const id = req.params.id;
+    await conn.db('barbearia-romas')
+        .collection('galeria')
+        .deleteOne({ _id: new ObjectId(id) });
+
+    res.sendStatus(204);
+});
 
 
 server.get('/agendamentos', async (req, res) => {
