@@ -108,7 +108,7 @@ server.put('/agendamentos/:id', async (req, res) => {
         .db('barbearia-romas')
         .collection('agendamento')
         .updateOne({ _id: new ObjectId(id) }, { $set: dados });
-    return res.sendStatus(201);
+    res.send({ ...dados, id });
 });
 
 server.listen(5010, () => console.log('API is up'));
