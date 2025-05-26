@@ -90,4 +90,13 @@ server.post('/agendamentos', async (req, res) => {
     res.status(201).send({ ...item, id: resultado.insertedId });
 });
 
+server.delete('/agendamentos/:id', async (req, res) => {
+    const id = req.params.id;
+
+    await conn
+    .db('barbearia-romas')
+    .collection('agendamento')
+    .deleteOne({_id: new ObjectId(id)});
+});
+
 server.listen(5010, () => console.log('API is up'));
