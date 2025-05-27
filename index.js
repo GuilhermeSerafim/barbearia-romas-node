@@ -111,4 +111,16 @@ server.put('/agendamentos/:id', async (req, res) => {
     res.send({ ...dados, id });
 });
 
+server.post('/admin', async (req, res) => {
+    const { user, password } = req.body;
+    const coll = conn.db('barbearia-romas').collection('user');
+    const admin = await coll.findOne({ user });
+
+    if (!admin || admin.password !== password) {
+        return res.status(401).json({ message: 'Usuário ou senha inválidos' });
+    }
+
+    return res.status(200).json({ authenticated: true });
+})
+
 server.listen(5010, () => console.log('API is up'));
